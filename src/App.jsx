@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 let nextID = 1
 
 function App() {
-    const tasks = useSelector((state) => state.tasks);
+    const tasks = useSelector((state) => state.root.tasks);
     const dispatch = useDispatch();
 
     function handleAddTask(text) {
