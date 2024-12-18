@@ -62,6 +62,7 @@ app.delete("/api/tasks/:id", async (req, res) => {
 // API Endpoint to update a task
 app.put("/api/tasks", async (req, res) => {
     let new_task = req.body;
+    console.log(new_task);
     try {
         const result = await pool.query("UPDATE tasks SET content = ($2), completed = ($3) WHERE id = ($1)",
             [new_task.id, new_task.content, new_task.done]);

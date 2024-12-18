@@ -17,6 +17,7 @@ const tasksReducer = (tasks = example_tasklist, action) => {
             ];
         }
         case 'edited': {
+            console.log("edited dispatch")
             return tasks.map((t) => {
                 if (t.id === action.task.id) {
                     return action.task;
