@@ -1,19 +1,14 @@
 import './App.css'
 import Button from './button.jsx'
 import Tasklist from "./tasklist.jsx";
-import { useReducer } from "react";
 import AddTask from "./addtask.jsx";
+import {useDispatch, useSelector} from "react-redux";
 
 let nextID = 1
 
-let example_tasklist = [{
-    id:0,
-    content:"debug",
-    completed:false
-}]
-
 function App() {
-    const [tasks, dispatch] = useReducer(tasksReducer, example_tasklist);
+    const tasks = useSelector((state) => state.tasks);
+    const dispatch = useDispatch();
 
     function handleAddTask(text) {
         dispatch({

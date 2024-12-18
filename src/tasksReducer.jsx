@@ -4,7 +4,7 @@ let example_tasklist = [{
     completed:false
 }]
 
-function tasksReducer(tasks = example_tasklist, action) {
+const tasksReducer = (tasks = example_tasklist, action) => {
     switch (action.type) {
         case 'added': {
             return [
@@ -35,7 +35,9 @@ function tasksReducer(tasks = example_tasklist, action) {
             return action.data;
         }
         default: {
-            throw Error('Unknown action: ' + action.type);
+            return tasks;
         }
     }
 }
+
+export default tasksReducer
