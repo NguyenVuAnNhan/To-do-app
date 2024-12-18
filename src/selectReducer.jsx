@@ -5,14 +5,14 @@ const selectReducer = (selected = example_selected, action) => {
         case 'all': {
             return "all";
         }
-        case 'completed': {
+        case 'select completed': {
             return "completed";
         }
         case 'not completed': {
             return "not completed";
         }
         default: {
-            return "all";
+            return selected;
         }
     }
 }

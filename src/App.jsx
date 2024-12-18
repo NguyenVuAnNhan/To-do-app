@@ -38,6 +38,26 @@ function App() {
         })
     }
 
+    function handleSelectAll(){
+        dispatch({
+            type: 'all'
+        })
+    }
+
+    function handleSelectCompleted(){
+        dispatch({
+            type: 'select completed'
+        })
+    }
+
+    function handleSelectUncompleted(){
+        dispatch({
+            type: 'not completed'
+        })
+    }
+
+    console.log(tasks);
+
     return(
         <>
             <div>TO-DO List</div>
@@ -50,6 +70,9 @@ function App() {
             </div>
             <AddTask onSubmit={handleAddTask}></AddTask>
             <Button onPress={() => handleRemoveCompleted()}>Remove all completed tasks</Button>
+            <Button onPress={() => handleSelectAll()}>Select all tasks</Button>
+            <Button onPress={() => handleSelectCompleted()}>Select all completed tasks</Button>
+            <Button onPress={() => handleSelectUncompleted()}>Select all uncompleted tasks</Button>
         </>
     )
 }

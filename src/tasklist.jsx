@@ -1,16 +1,38 @@
 import './App.css'
 import {useState} from "react";
 import Button from "./button.jsx";
+import {useSelector} from "react-redux";
 
 
 function Tasklist({tasks, onChangeTask, onDeleteTask}){
+    const selected = useSelector((state) => state.root.selected);
+    let content;
+
+    if (selected === "all"){
+        content = tasks.map((task) => (
+            <li key={task.id}>
+                <Task task={task} onChange={onChangeTask} onDelete={onDeleteTask} />
+            </li>
+        ))
+    }
+    else if (selected === "completed"){
+        content = tasks.map((task) => !task.completed ? null : (
+            <li key={task.id}>
+                <Task task={task} onChange={onChangeTask} onDelete={onDeleteTask} />
+            </li>
+        ))
+    }
+    else{
+        content = tasks.map((task) => task.completed ? null : (
+            <li key={task.id}>
+                <Task task={task} onChange={onChangeTask} onDelete={onDeleteTask} />
+            </li>
+        ))
+    }
+
     return (
         <ul>
-            {tasks.map((task) => (
-                <li key={task.id}>
-                    <Task task={task} onChange={onChangeTask} onDelete={onDeleteTask} />
-                </li>
-            ))}
+            {content}
         </ul>
     )
 }
