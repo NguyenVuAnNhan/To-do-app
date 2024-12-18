@@ -5,9 +5,11 @@ import AddTask from "./addtask.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 
-let nextID = 1
-
 function App() {
+    const nextID = useSelector((state) => state.root.tasks[state.root.tasks.length - 1].id + 1);
+
+    console.log(nextID);
+
     const tasks = useSelector((state) => state.root.tasks);
     const dispatch = useDispatch();
 
@@ -17,7 +19,7 @@ function App() {
     function handleAddTask(text) {
         dispatch({
             type: 'added',
-            id: nextID++,
+            id: nextID,
             content: text,
         });
     }

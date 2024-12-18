@@ -16,6 +16,18 @@ function* watchFetchData() {
     yield takeLatest('FETCH_DATA', fetchData);  // This should listen for the action type
 }
 
+function* addData(action){
+    try {
+        const response = yield call(axios.post, '')
+    } catch (error){
+        yield put({ type: 'ADD_DATA_FAILURE', error: error.message });
+    }
+}
+
+function* watchAddData(){
+    yield takeLatest('added', addData);
+}
+
 export default function* rootSaga() {
     console.log("rootSaga triggered")
     yield all([watchFetchData()]);  // Run watcher sagas

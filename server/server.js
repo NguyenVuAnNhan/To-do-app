@@ -33,6 +33,21 @@ app.get("/api/tasks", async (req, res) => {
     }
 });
 
+// API Endpoint to add new task
+app.post("/api/tasks", async (req, res) => {
+    try {
+        const result = await pool.query("SELECT * FROM tasks");
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+    }
+});
+
+// API Endpoint to remove a task
+
+// API Endpoint to update a task
+
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
