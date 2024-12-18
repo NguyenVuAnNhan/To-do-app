@@ -63,8 +63,8 @@ function Task({task, onChange, onDelete}) {
             <Button onPress={() => {
                 onDelete(task.id)
             }}>Delete</Button>
-            <Button onPress={() => {
-                changeEdit(!isEditing)
+            <Button onPress={() => { task.content.length > 0 ?
+                changeEdit(!isEditing) : changeEdit(isEditing)
             }}>{isEditing ? "Save" : "Edit"}</Button>
         </>
     )
