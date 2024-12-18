@@ -9,6 +9,7 @@ const app = express();
 
 // Enable CORS for all routes
 app.use(cors());
+app.use(express.json());
 
 const port = 3000;
 
@@ -35,8 +36,10 @@ app.get("/api/tasks", async (req, res) => {
 
 // API Endpoint to add new task
 app.post("/api/tasks", async (req, res) => {
+    let new_task = req.body;
     try {
-        const result = await pool.query("SELECT * FROM tasks");
+        const result = await pool.query("INSERT INTO tasks (id, content, completed) VALUES ($1, $2, $3)",
+            [new_task.id, new_task.content, new_task.done]);
         res.json(result.rows);
     } catch (err) {
         console.error(err.message);
@@ -47,6 +50,8 @@ app.post("/api/tasks", async (req, res) => {
 // API Endpoint to remove a task
 
 // API Endpoint to update a task
+
+// API Endpoint to remove all completed tasks
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

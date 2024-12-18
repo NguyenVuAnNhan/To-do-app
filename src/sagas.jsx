@@ -18,7 +18,15 @@ function* watchFetchData() {
 
 function* addData(action){
     try {
-        const response = yield call(axios.post, '')
+        let data = {
+            id: action.id,
+            content: action.content,
+            done: false
+        };
+        console.log(data);
+        const response = yield call(axios.post, 'http://localhost:3000/api/tasks', data)
+        console.log(response);
+
     } catch (error){
         yield put({ type: 'ADD_DATA_FAILURE', error: error.message });
     }
@@ -28,7 +36,9 @@ function* watchAddData(){
     yield takeLatest('added', addData);
 }
 
+
+
 export default function* rootSaga() {
     console.log("rootSaga triggered")
-    yield all([watchFetchData()]);  // Run watcher sagas
+    yield all([watchFetchData(), watchAddData()]);  // Run watcher sagas
 }
