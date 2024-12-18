@@ -38,9 +38,28 @@ function* watchAddData(){
     yield takeLatest('added', addData);
 }
 
+// Middleware for removing completed tasks
+
+// Middleware for updating tasks
+
+// Middleware for removing a task
+function* removeTask(action){
+    try {
+        const response = yield call(axios.delete, 'http://localhost:3000/api/tasks/' + action.id.toString())
+        console.log(response);
+
+    } catch (error){
+        yield put({ type: 'ADD_DATA_FAILURE', error: error.message });
+    }
+}
+
+function* watchRemoveTask(){
+    yield takeLatest('removed', removeTask);
+}
+
 
 
 export default function* rootSaga() {
     console.log("rootSaga triggered")
-    yield all([watchFetchData(), watchAddData()]);  // Run watcher sagas
+    yield all([watchFetchData(), watchAddData(), watchRemoveTask()]);  // Run watcher sagas
 }

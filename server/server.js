@@ -48,10 +48,10 @@ app.post("/api/tasks", async (req, res) => {
 });
 
 // API Endpoint to remove a task
-app.delete("/api/tasks", async (req, res) => {
-    let old_task = req.body;
+app.delete("/api/tasks/:id", async (req, res) => {
+    let old_task = req.params['id'];
     try {
-        const result = await pool.query("DELETE FROM tasks WHERE id = ($1)", [old_task.id]);
+        const result = await pool.query("DELETE FROM tasks WHERE id = ($1)", [old_task]);
         res.json(result.rows);
     } catch (err) {
         console.error(err.message);
