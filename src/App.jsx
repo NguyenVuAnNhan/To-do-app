@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 
 function App() {
-    const nextID = useSelector((state) => state.root.tasks[state.root.tasks.length - 1].id + 1);
+    const nextID = useSelector((state) => state.root.tasks.length === 0 ? 0 : state.root.tasks[state.root.tasks.length - 1].id + 1);
 
     console.log(nextID);
 

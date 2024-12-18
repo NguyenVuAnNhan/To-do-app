@@ -48,10 +48,38 @@ app.post("/api/tasks", async (req, res) => {
 });
 
 // API Endpoint to remove a task
+app.delete("/api/tasks", async (req, res) => {
+    let old_task = req.body;
+    try {
+        const result = await pool.query("DELETE FROM tasks WHERE id = ($1)", [old_task.id]);
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+    }
+});
 
 // API Endpoint to update a task
+app.put("/api/tasks", async (req, res) => {
+    let new_task = req.body;
+    try {
+        const result = await pool.query("UPDATE tasks SET content = ($2), completed = ($3) WHERE id = ($1)",
+            [new_task.id, new_task.content, new_task.done]);
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+    }
+});
 
 // API Endpoint to remove all completed tasks
+app.delete("/api/tasks/completed", async(req, res) => {
+    try {
+        const result = await pool.query("DELETE FROM tasks WHERE completed = true");
+    } catch (err) {
+        res.status(500).send("Server error");
+    }
+});
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

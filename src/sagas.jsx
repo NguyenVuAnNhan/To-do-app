@@ -16,6 +16,8 @@ function* watchFetchData() {
     yield takeLatest('FETCH_DATA', fetchData);  // This should listen for the action type
 }
 
+// Middleware for adding task
+
 function* addData(action){
     try {
         let data = {
