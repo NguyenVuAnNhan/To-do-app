@@ -3,12 +3,16 @@ import Button from './button.jsx'
 import Tasklist from "./tasklist.jsx";
 import AddTask from "./addtask.jsx";
 import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
 
 let nextID = 1
 
 function App() {
     const tasks = useSelector((state) => state.root.tasks);
     const dispatch = useDispatch();
+
+    useEffect(() => {console.log("useEffect triggered")
+        dispatch({type:'FETCH_DATA'})}, [])
 
     function handleAddTask(text) {
         dispatch({
