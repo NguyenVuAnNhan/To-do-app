@@ -39,6 +39,19 @@ function* watchAddData(){
 }
 
 // Middleware for removing completed tasks
+function* deleteCompleted(action) {
+    console.log('deleteCompleted triggered');
+    try {
+        const response = yield call(axios.delete, 'http://localhost:3000/api/tasks/completed');
+    } catch (error) {
+        yield put({ type: 'DELETE_DATA_FAILURE', error: error.message });
+    }
+}
+
+function* watchDeleteCompleted() {
+    console.log('Watcher is active');
+    yield takeLatest('completed', deleteCompleted);  // This should listen for the action type
+}
 
 // Middleware for updating tasks
 function* updateTask(action){
@@ -81,5 +94,5 @@ function* watchRemoveTask(){
 
 export default function* rootSaga() {
     console.log("rootSaga triggered")
-    yield all([watchFetchData(), watchAddData(), watchRemoveTask(), watchUpdateTask()]);  // Run watcher sagas
+    yield all([watchFetchData(), watchAddData(), watchRemoveTask(), watchUpdateTask(), watchDeleteCompleted()]);  // Run watcher sagas
 }

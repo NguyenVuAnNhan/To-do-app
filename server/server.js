@@ -25,6 +25,7 @@ const pool = new Pool({
 
 // API Endpoint to get data
 app.get("/api/tasks", async (req, res) => {
+    console.log("are you here?")
     try {
         const result = await pool.query("SELECT * FROM tasks");
         res.json(result.rows);
@@ -37,12 +38,25 @@ app.get("/api/tasks", async (req, res) => {
 // API Endpoint to add new task
 app.post("/api/tasks", async (req, res) => {
     let new_task = req.body;
+    console.log("are you here?")
     try {
         const result = await pool.query("INSERT INTO tasks (id, content, completed) VALUES ($1, $2, $3)",
             [new_task.id, new_task.content, new_task.done]);
         res.json(result.rows);
     } catch (err) {
         console.error(err.message);
+        res.status(500).send("Server error");
+    }
+});
+
+// API Endpoint to remove all completed tasks
+app.delete("/api/tasks/completed", async(req, res) => {
+    console.log("working here my man")
+    try {
+        console.log("working here")
+        const result = await pool.query("DELETE FROM tasks WHERE completed = TRUE");
+        console.log("no error")
+    } catch (err) {
         res.status(500).send("Server error");
     }
 });
@@ -69,15 +83,6 @@ app.put("/api/tasks", async (req, res) => {
         res.json(result.rows);
     } catch (err) {
         console.error(err.message);
-        res.status(500).send("Server error");
-    }
-});
-
-// API Endpoint to remove all completed tasks
-app.delete("/api/tasks/completed", async(req, res) => {
-    try {
-        const result = await pool.query("DELETE FROM tasks WHERE completed = true");
-    } catch (err) {
         res.status(500).send("Server error");
     }
 });
