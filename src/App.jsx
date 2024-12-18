@@ -57,42 +57,6 @@ function App() {
             <Button onPress={() => handleRemoveCompleted()}>Remove all completed tasks</Button>
         </>
     )
-
-    function tasksReducer(tasks, action) {
-        switch (action.type) {
-            case 'added': {
-                return [
-                    ...tasks,
-                    {
-                        id: action.id,
-                        content: action.content,
-                        done: false,
-                    },
-                ];
-            }
-            case 'edited': {
-                return tasks.map((t) => {
-                    if (t.id === action.task.id) {
-                        return action.task;
-                    } else {
-                        return t;
-                    }
-                });
-            }
-            case 'removed': {
-                return tasks.filter((t) => t.id !== action.id);
-            }
-            case 'completed': {
-                return tasks.filter((t) => t.completed !== true);
-            }
-            case 'set': {
-                return action.data;
-            }
-            default: {
-                throw Error('Unknown action: ' + action.type);
-            }
-        }
-    }
 }
 
 export default App
