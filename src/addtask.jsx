@@ -1,13 +1,15 @@
 import './App.css'
-import Button from "./button.jsx";
+import { Button } from "antd";
 import {useState} from "react";
+import { EditOutlined} from '@ant-design/icons';
+import { Input } from "antd";
 
 function AddTask({onSubmit}){
     const [content, changeContent] = useState("");
     return(
         <>
-            <input maxLength={50} minLength={1} type="text" onChange={(e) => {changeContent(e.target.value)}}></input>
-            <Button onPress={() => content.length > 0 ? onSubmit(content) : null}>Add task</Button>
+            <Input maxLength={50} minLength={1} type="text" onChange={(e) => {changeContent(e.target.value)}}></Input>
+            <Button icon={<EditOutlined />} onClick={() => content.length > 0 ? onSubmit(content) : null}>Add task</Button>
         </>
     )
 }

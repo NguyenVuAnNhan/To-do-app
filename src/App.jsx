@@ -1,9 +1,11 @@
 import './App.css'
-import Button from './button.jsx'
 import Tasklist from "./tasklist.jsx";
 import AddTask from "./addtask.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
+import {Button, Col, Row} from "antd"
+import { Typography } from "antd";
+import {DeleteOutlined, SearchOutlined} from "@ant-design/icons"
 
 function App() {
     const nextID = useSelector((state) => state.root.tasks.length === 0 ? 0 : state.root.tasks[state.root.tasks.length - 1].id + 1);
@@ -66,7 +68,7 @@ function App() {
 
     return(
         <>
-            <div>TO-DO List</div>
+            <Typography.Title>TO-DO List</Typography.Title>
             <div id={"box"}>
                 <Tasklist
                     tasks={tasks}
@@ -74,11 +76,13 @@ function App() {
                     onDeleteTask={handleRemoveTask}
                 />
             </div>
-            <AddTask onSubmit={handleAddTask}></AddTask>
-            <Button onPress={() => handleRemoveCompleted()}>Remove all completed tasks</Button>
-            <Button onPress={() => handleSelectAll()}>Select all tasks</Button>
-            <Button onPress={() => handleSelectCompleted()}>Select all completed tasks</Button>
-            <Button onPress={() => handleSelectUncompleted()}>Select all uncompleted tasks</Button>
+            <Row>
+                <Col><AddTask onSubmit={handleAddTask}></AddTask></Col>
+                <Col><Button danger={true} onClick={() => handleRemoveCompleted()}><DeleteOutlined/> Remove all completed tasks</Button>
+                    <Button onClick={() => handleSelectAll()}><SearchOutlined/> Select all tasks</Button>
+                    <Button onClick={() => handleSelectCompleted()}><SearchOutlined/> Select all completed tasks</Button>
+                    <Button onClick={() => handleSelectUncompleted()}><SearchOutlined/> Select all uncompleted tasks</Button></Col>
+            </Row>
         </>
     )
 }
