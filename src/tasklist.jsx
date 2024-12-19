@@ -53,7 +53,7 @@ function Task({task, onChange, onDelete}) {
         }}></Input.TextArea></div>
     } else {
         task_content = <div style={{marginLeft: "12px"}}>
-            <text>{task.content}</text>
+            <text aria-readonly={'true'}>{task.content}</text>
         </div>
     }
     return (
