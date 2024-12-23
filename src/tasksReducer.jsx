@@ -32,7 +32,7 @@ const tasksReducer = (tasks = example_tasklist, action) => {
         case COMPLETED: {
             return tasks.filter((t) => t.completed !== true);
         }
-        case 'set': {
+        case SET: {
             return action.data;
         }
         default: {

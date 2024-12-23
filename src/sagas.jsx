@@ -2,18 +2,16 @@ import { all, takeLatest, call, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* fetchData(action) {
-    console.log('fetchData triggered');
     try {
         const response = yield call(axios.get, 'http://localhost:3000/api/tasks');
-        yield put({ type: 'set', data: response.data });
+        yield put({ type: SET, data: response.data });
     } catch (error) {
-        yield put({ type: 'FETCH_DATA_FAILURE', error: error.message });
+        yield put({ type: FETCH_DATA_FAILURE, error: error.message });
     }
 }
 
 function* watchFetchData() {
-    console.log('Watcher is active');
-    yield takeLatest('FETCH_DATA', fetchData);  // This should listen for the action type
+    yield takeLatest(FETCH_DATA, fetchData);  // This should listen for the action type
 }
 
 // Middleware for adding task
@@ -30,27 +28,25 @@ function* addData(action){
         console.log(response);
 
     } catch (error){
-        yield put({ type: 'ADD_DATA_FAILURE', error: error.message });
+        yield put({ type: ADD_DATA_FAILURE, error: error.message });
     }
 }
 
 function* watchAddData(){
-    yield takeLatest('added', addData);
+    yield takeLatest(ADDED, addData);
 }
 
 // Middleware for removing completed tasks
 function* deleteCompleted(action) {
-    console.log('deleteCompleted triggered');
     try {
         const response = yield call(axios.delete, 'http://localhost:3000/api/tasks/completed');
     } catch (error) {
-        yield put({ type: 'DELETE_DATA_FAILURE', error: error.message });
+        yield put({ type: DELETE_DATA_FAILURE, error: error.message });
     }
 }
 
 function* watchDeleteCompleted() {
-    console.log('Watcher is active');
-    yield takeLatest('completed', deleteCompleted);  // This should listen for the action type
+    yield takeLatest(COMPLETED, deleteCompleted);  // This should listen for the action type
 }
 
 // Middleware for updating tasks
@@ -66,13 +62,13 @@ function* updateTask(action){
         console.log(response);
 
     } catch (error){
-        yield put({ type: 'ADD_DATA_FAILURE', error: error.message });
+        yield put({ type: ADD_DATA_FAILURE, error: error.message });
     }
 }
 
 function* watchUpdateTask(){
     console.log("watcher activated");
-    yield takeLatest('edited', updateTask);
+    yield takeLatest(EDITED, updateTask);
 }
 
 // Middleware for removing a task
@@ -82,17 +78,16 @@ function* removeTask(action){
         console.log(response);
 
     } catch (error){
-        yield put({ type: 'ADD_DATA_FAILURE', error: error.message });
+        yield put({ type: ADD_DATA_FAILURE, error: error.message });
     }
 }
 
 function* watchRemoveTask(){
-    yield takeLatest('removed', removeTask);
+    yield takeLatest(REMOVED, removeTask);
 }
 
 
 
 export default function* rootSaga() {
-    console.log("rootSaga triggered")
     yield all([watchFetchData(), watchAddData(), watchRemoveTask(), watchUpdateTask(), watchDeleteCompleted()]);  // Run watcher sagas
 }
