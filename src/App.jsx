@@ -1,6 +1,6 @@
 import './App.css'
-import Tasklist from "./tasklist.jsx";
-import AddTask from "./addtask.jsx";
+import TaskList from "./components/TaskList.jsx";
+import AddTask from "./components/AddTask.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {Button, Col, Row} from "antd"
@@ -70,7 +70,7 @@ function App() {
         <>
             <Typography.Title>TO-DO List</Typography.Title>
             <div id={"box"}>
-                <Tasklist
+                <TaskList
                     tasks={tasks}
                     onChangeTask={handleEditTask}
                     onDeleteTask={handleRemoveTask}

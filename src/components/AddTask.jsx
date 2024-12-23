@@ -1,4 +1,4 @@
-import './App.css'
+import '../App.css'
 import { Button } from "antd";
 import {useState} from "react";
 import { EditOutlined} from '@ant-design/icons';
