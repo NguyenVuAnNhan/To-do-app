@@ -4,9 +4,11 @@ import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 
 function Task({task, onChange, onDelete}) {
     const [isEditing, changeEdit] = useState(false);
-    let task_content;
+
+    let taskContent;
+
     if (isEditing) {
-        task_content = <div><Input.TextArea autoSize={true} maxLength={50} minLength={1} defaultValue={task.content} onChange={(e) => {
+        taskContent = <div><Input.TextArea autoSize={true} maxLength={50} minLength={1} defaultValue={task.content} onChange={(e) => {
             onChange({
                 "id": task.id,
                 "content": e.target.value,
@@ -14,7 +16,7 @@ function Task({task, onChange, onDelete}) {
             }) //Change mechanisms to get undo and input validation button
         }}></Input.TextArea></div>
     } else {
-        task_content = <div style={{marginLeft: "12px"}}>
+        taskContent = <div style={{marginLeft: "12px"}}>
             <text aria-readonly={'true'}>{task.content}</text>
         </div>
     }
@@ -33,7 +35,7 @@ function Task({task, onChange, onDelete}) {
 
             {/* Task Input */}
             <Col flex="auto" style={{textAlign: "left"}}>
-                {task_content}
+                {taskContent}
             </Col>
 
             {/* Action Buttons */}
