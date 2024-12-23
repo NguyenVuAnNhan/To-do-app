@@ -16,11 +16,11 @@ function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {console.log("useEffect triggered")
-        dispatch({type:'FETCH_DATA'})}, [])
+        dispatch({type:FETCH_DATA})}, [])
 
     function handleAddTask(text) {
         dispatch({
-            type: 'added',
+            type: ADDED,
             id: nextID,
             content: text,
         });
@@ -28,39 +28,39 @@ function App() {
 
     function handleRemoveTask(taskid){
         dispatch({
-            type: 'removed',
+            type: REMOVED,
             id: taskid
         })
     }
 
     function handleRemoveCompleted(){
         dispatch({
-            type:'completed'
+            type:COMPLETED
         })
     }
 
     function handleEditTask(task) {
         dispatch({
-            type: 'edited',
+            type: EDITED,
             task: task
         })
     }
 
     function handleSelectAll(){
         dispatch({
-            type: 'all'
+            type: ALL
         })
     }
 
     function handleSelectCompleted(){
         dispatch({
-            type: 'select completed'
+            type: SELECT_COMPLETED
         })
     }
 
     function handleSelectUncompleted(){
         dispatch({
-            type: 'not completed'
+            type: NOT_COMPLETED
         })
     }
 

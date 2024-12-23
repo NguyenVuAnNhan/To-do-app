@@ -1,0 +1,8 @@
+FETCH_DATA = 'FETCH_DATA'
+ADDED = 'added'
+REMOVED = 'removed'
+COMPLETED = 'completed'
+EDITED = 'edited'
+ALL = 'all'
+SELECT_COMPLETED = 'select completed'
+NOT_COMPLETED = 'not completed'

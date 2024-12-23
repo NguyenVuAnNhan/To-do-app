@@ -6,7 +6,7 @@ let example_tasklist = [{
 
 const tasksReducer = (tasks = example_tasklist, action) => {
     switch (action.type) {
-        case 'added': {
+        case ADDED: {
             return [
                 ...tasks,
                 {
@@ -16,7 +16,7 @@ const tasksReducer = (tasks = example_tasklist, action) => {
                 },
             ];
         }
-        case 'edited': {
+        case EDITED: {
             console.log("edited dispatch")
             return tasks.map((t) => {
                 if (t.id === action.task.id) {
@@ -26,10 +26,10 @@ const tasksReducer = (tasks = example_tasklist, action) => {
                 }
             });
         }
-        case 'removed': {
+        case REMOVED: {
             return tasks.filter((t) => t.id !== action.id);
         }
-        case 'completed': {
+        case COMPLETED: {
             return tasks.filter((t) => t.completed !== true);
         }
         case 'set': {
