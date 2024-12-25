@@ -6,6 +6,7 @@ import {useEffect} from "react";
 import {Button, Col, Row} from "antd"
 import { Typography } from "antd";
 import {DeleteOutlined, SearchOutlined} from "@ant-design/icons"
+import {ADDED, ALL, COMPLETED, EDITED, FETCH_DATA, NOT_COMPLETED, REMOVED, SELECT_COMPLETED} from "./Items.jsx";
 
 function App() {
     const nextID = useSelector((state) => state.root.tasks.length === 0 ? 0 : state.root.tasks[state.root.tasks.length - 1].id + 1);

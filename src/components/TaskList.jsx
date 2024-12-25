@@ -9,7 +9,7 @@ function TaskList({tasks, onChangeTask, onDeleteTask}){
     let filteredTasks;
 
     if (selected === "all"){
-
+        filteredTasks = tasks.filter(task => true);
     }
     else if (selected === "completed"){
         filteredTasks = tasks.filter(task => task.completed);

@@ -4,6 +4,8 @@ let example_tasklist = [{
     completed:false
 }]
 
+import {ADDED, COMPLETED, EDITED, REMOVED, SET} from "./Items.jsx";
+
 const tasksReducer = (tasks = example_tasklist, action) => {
     switch (action.type) {
         case ADDED: {
